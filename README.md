@@ -9,6 +9,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Collections;
+
 
 namespace Elevator
 {
@@ -21,8 +23,34 @@ namespace Elevator
 
         string[] s;
         string temp;
+        string elev;
         string[] split;
-        int N, U, D, I, J, L;
+        string[] split1;
+        int N, U, D, I, J, L, K;
+        int len=2;
+        //int [] Fl=new int[100000];
+        List <int> list= new List<int>();
+        void VstavMassiv(int n)
+        {
+           if(!list.Contains(n))
+           {
+               list.Add(n);
+           }
+        }
+
+        void ListOut()
+        {
+            
+        
+            int[] myArray = list.ToArray();
+            string ttt = "";
+            for (int i = 0; i < myArray.Length; i++)
+            {
+                ttt = ttt + myArray[i].ToString()+", ";
+            }
+            listBox1.Items.Add(ttt);
+        
+        }
         private void button1_Click(object sender, EventArgs e)
         {
             s = File.ReadAllLines("info.txt");
@@ -34,10 +62,22 @@ namespace Elevator
             I = Convert.ToInt32(split[3]);
             J = Convert.ToInt32(split[4]);
             L = Convert.ToInt32(split[5]);
-            for(int i=1; i<L; i++)
+            list.Add(1);
+            list.Add(N);
+            for(int i=1; i<=L; i++)
             {
-
+                temp = s[i];
+                split1=temp.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                K = Convert.ToInt32(split1[0]);
+                for(int k=1; k<=K; k++)
+                {
+                    VstavMassiv(Convert.ToInt32(split1[k]));
+                }
             }
+            list.Sort();
+            int[] myArray = list.ToArray();
+            ListOut();
+
 
         }
     }
