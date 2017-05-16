@@ -1,0 +1,26 @@
+ void EasyZ(int []myArray)//простое заполнение массива
+        {
+            len = myArray.Length;
+            dataGridView1.RowCount = len;
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView1.ColumnCount = len;
+            AM = new int[len, len];
+            for(int i=0; i<len; i++)
+            {
+                
+                for (int j = 0; j <= i; j++)
+                {
+                    if (i == j)
+                        AM[i, j] = 0;
+                    AM[i, j] = (myArray[i] - myArray[j]) * D;
+                }
+                for(int j=i+1; j<len; j++)
+                {
+                    AM[i, j] = (myArray[j] - myArray[i]) * U;
+                }
+            }
+            //for (int i = 0; i < len; i++)
+              //for (int j = 0; j < len; j++)
+                //   dataGridView1.Rows[i].Cells[j].Value = AM[i, j];
+
+        }
