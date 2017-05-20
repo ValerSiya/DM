@@ -1,0 +1,65 @@
+ void Mindist(string[] split, int K, int [,] AM, int[] myArray)
+        {
+            for(int i=1; i<=K; i++)
+            {
+                for(int j=1; j<=K; j++)
+                {
+                    if(i!=j)
+                    {
+                        if (AM[Indexx(Convert.ToInt32(split[i]), myArray), Indexx(Convert.ToInt32(split[j]), myArray)] > (I + J))
+                            AM[Indexx(Convert.ToInt32(split[i]), myArray), Indexx(Convert.ToInt32(split[j]), myArray)] = (I + J);
+                    }
+
+                }
+            }
+        }
+        int[] Dek;
+        int[] minvers;
+        void Deikstra()
+        {
+           Dek = new int[len];
+            minvers = new int[len];
+            bool[] used = new bool[len];
+            for (int i = 0; i < len; i++)
+            {
+
+                Dek[i] = 1000001;
+                used[i] = false;
+            }
+            Dek[0] = 0;
+            minvers[0] = 0;
+            int minindex;
+            int min;
+            int tempv = 0;
+            do
+            {
+                minindex = 1000001;
+                min = 1000001;
+                for (int i = 0; i < len; i++)
+                {
+                    if (!used[i] && Dek[i] < min)
+                    {
+                        min = Dek[i];
+                        minindex = i;
+                        //listBox2.Items.Add(minindex + 1);
+                    }
+                }
+                if (minindex != 1000001)
+                {
+                    for (int i = 0; i < len; i++)
+                    {
+                        if (AM[minindex, i] > 0)
+                        {
+                            tempv = min + AM[minindex, i];
+                            if (tempv < Dek[i])
+                            {
+                                Dek[i] = tempv;
+                                minvers[i] = minindex + 1;
+                            }
+                        }
+                    }
+                    used[minindex] = true;
+                }
+            } while (minindex < 1000001);
+
+        }
